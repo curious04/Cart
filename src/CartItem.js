@@ -6,13 +6,17 @@ class CartItem extends React.Component{
     constructor () {
         super();
         this.state={
-            price: 999,
+            price: '₹ ' + 999,
             title: 'iPhone',
             qty:  0,
             img: ''
         }
         //this.increaseQuantity = this.increaseQuantity.bind(this);
+        
     }
+    
+    //**UPDATE**: setState acts like asynchronus call inside promises also
+    
     increaseQuantity = () => {
         // console.log('this', this.state);
         //setState form1
@@ -25,6 +29,8 @@ class CartItem extends React.Component{
             return{
                 qty: prevState.qty + 1
             }
+        }, () => {
+            console.log('this.state',this.state);
         });
     }
 
