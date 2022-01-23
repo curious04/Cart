@@ -3,40 +3,6 @@ import React from 'react';
 
 class CartItem extends React.Component{
 
-   
-    
-    //**UPDATE**: setState acts like asynchronus call inside promises also
-    
-    increaseQuantity = () => {
-        // console.log('this', this.state);
-        //setState form1
-        // this.setState({
-        //     qty: this.state.qty+1
-        // });
-
-        // setState form2 - if prevState rqeuired use this
-        this.setState((prevState) => {
-            return{
-                qty: prevState.qty + 1
-            }
-        }, () => {
-            console.log('this.state',this.state);
-        });
-    }
-
-    decreaseQuantity = () => {
-        const {qty} = this.state;
-
-        if(qty === 0){
-            return;
-        }
-        this.setState((prevState) => {
-            return{
-                
-                qty: prevState.qty - 1
-            }
-        });
-    }
     render(){
         const{ price, title, qty} = this.props.product;
         return (
@@ -51,10 +17,11 @@ class CartItem extends React.Component{
                     <div className='cart-item-actions'>
                         {/* Buttons */}
                         <img alt='increase' className='action-icons' src='https://cdn-icons-png.flaticon.com/512/992/992651.png'
-                        onClick = {this.increaseQuantity}  />
+                        onClick = { () => this.props.onIncreaseQuantity(this.props.product)}  />
                         <img alt='decrease' className='action-icons' src='https://cdn-icons-png.flaticon.com/512/992/992683.png'
-                        onClick={this.decreaseQuantity} />
-                        <img alt='delete' className='action-icons' src='https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1642937394~hmac=3689669884ce247dbe3c504a938f95e1' />
+                        onClick={ () => this.props.onDecreaseQuantity(this.props.product)} />
+                        <img alt='delete' className='action-icons' src='https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1642937394~hmac=3689669884ce247dbe3c504a938f95e1' 
+                        onClick={ () => this.props.onDeleteQuantity(this.props.product.id)} />
                     </div>
                 </div>
             </div>
