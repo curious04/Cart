@@ -8,15 +8,39 @@ class CartItem extends React.Component{
         this.state={
             price: 999,
             title: 'iPhone',
-            qty:  1,
+            qty:  0,
             img: ''
         }
         //this.increaseQuantity = this.increaseQuantity.bind(this);
     }
     increaseQuantity = () => {
-        console.log('this', this.state);
+        // console.log('this', this.state);
+        //setState form1
+        // this.setState({
+        //     qty: this.state.qty+1
+        // });
+
+        // setState form2 - if prevState rqeuired use this
+        this.setState((prevState) => {
+            return{
+                qty: prevState.qty + 1
+            }
+        });
     }
 
+    decreaseQuantity = () => {
+        const {qty} = this.state;
+
+        if(qty === 0){
+            return;
+        }
+        this.setState((prevState) => {
+            return{
+                
+                qty: prevState.qty - 1
+            }
+        });
+    }
     render(){
         const{ price, title, qty} = this.state;
         return (
@@ -32,7 +56,8 @@ class CartItem extends React.Component{
                         {/* Buttons */}
                         <img alt='increase' className='action-icons' src='https://cdn-icons-png.flaticon.com/512/992/992651.png'
                         onClick = {this.increaseQuantity}  />
-                        <img alt='decrease' className='action-icons' src='https://cdn-icons-png.flaticon.com/512/992/992683.png' />
+                        <img alt='decrease' className='action-icons' src='https://cdn-icons-png.flaticon.com/512/992/992683.png'
+                        onClick={this.decreaseQuantity} />
                         <img alt='delete' className='action-icons' src='https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1642937394~hmac=3689669884ce247dbe3c504a938f95e1' />
                     </div>
                 </div>
