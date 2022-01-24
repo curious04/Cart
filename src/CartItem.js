@@ -1,14 +1,14 @@
 
 import React from 'react';
 
-class CartItem extends React.Component{
+const CartItem = (props) => {
 
-    render(){
-        const{ price, title, qty} = this.props.product;
+    
+        const{ price, title, qty} = props.product;
         return (
             <div className='cart-item'>
                 <div className='left-block'>
-                    <img style={styles.image} />
+                    <img style={styles.image} src={props.product.img} />
                 </div>
                 <div className='right-block'>
                     <div style={{ fontSize: 25}}>{title}</div>
@@ -17,16 +17,16 @@ class CartItem extends React.Component{
                     <div className='cart-item-actions'>
                         {/* Buttons */}
                         <img alt='increase' className='action-icons' src='https://cdn-icons-png.flaticon.com/512/992/992651.png'
-                        onClick = { () => this.props.onIncreaseQuantity(this.props.product)}  />
+                        onClick = { () => props.onIncreaseQuantity(props.product)}  />
                         <img alt='decrease' className='action-icons' src='https://cdn-icons-png.flaticon.com/512/992/992683.png'
-                        onClick={ () => this.props.onDecreaseQuantity(this.props.product)} />
+                        onClick={ () => props.onDecreaseQuantity(props.product)} />
                         <img alt='delete' className='action-icons' src='https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1642937394~hmac=3689669884ce247dbe3c504a938f95e1' 
-                        onClick={ () => this.props.onDeleteQuantity(this.props.product.id)} />
+                        onClick={ () => props.onDeleteQuantity(props.product.id)} />
                     </div>
                 </div>
             </div>
         )
-    }
+    
 }
 
 const styles = {
